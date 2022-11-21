@@ -76,6 +76,7 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .game-header {
@@ -91,19 +92,68 @@ body {
 .btn {
     cursor: pointer;
     color: #ffffff;
-    background-color: #f26b6f;
+    font-style: 26px;
+    text-transform: uppercase;
     font-weight: 500;
+    padding: 15px 30px;
     border: none;
 }
 
 .btn-start {
+    background-color: #4b9200;
     align-self: center;
-    font-style: 26px;
-    text-transform: uppercase;
     margin: 20px auto;
-    padding: 15px 30px;
 }
 
-.btn-start:hover {
-    background-color: #da6064;
+.btn-start:hover,
+.btn-confirm:hover {
+    background-color: #3f7900;
+}
+
+.btn-restart {
+    background-color: #f26b6f;
+    position: absolute;
+    top: 25px;
+}
+
+.btn-restart:hover {
+    background-color: #e47209;
+}
+
+.arrangement {
+    text-align: center;
+}
+
+.arrangement .player-name {
+    margin: 20px 0;
+}
+
+.grid {
+    color: #767474;
+    margin: 20px auto;
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 300px;
+    height: 300px;
+    border: 2px solid #767474;
+}
+
+.grid-square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    background-color: #bdbdbd;
+    border: 2px solid #767474;
+}
+
+.btn-confirm {
+    background-color: #488c00;
+}
+
+.arrangement .disabled {
+    cursor: default;
+    background-color: #bdbdbd;
 }

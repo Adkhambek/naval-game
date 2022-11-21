@@ -9,11 +9,52 @@ class App extends React.Component<{}, State> {
         super(props);
         this.state = {
             stage: "start",
+            currentPlayer: 1,
+            locations: [],
         };
     }
 
+    placeShip = (cell: number) => {
+        const player = this.state.currentPlayer;
+        const locations = [...this.state.locations];
+        const index = locations.findIndex(
+            (locations) =>
+                locations.cell === cell && locations.player === player
+        );
+        if (index === -1) {
+            if (this.checkEightShip()) return;
+            locations.push({ player, cell });
+        } else locations.splice(index, 1);
+
+        this.setState({ locations });
+    };
+
     startGame = () => {
         this.setState({ stage: "arrangement" });
+    };
+
+    restartGame = () => {
+        this.setState({ stage: "start" });
+    };
+
+    confirm = () => {
+        if (!this.checkEightShip()) return;
+        if (this.state.currentPlayer !== 2) {
+            this.setState({ currentPlayer: 2 });
+        } else {
+            this.setState({
+                currentPlayer: 1,
+                stage: "game",
+            });
+        }
+    };
+
+    checkEightShip = () => {
+        const locations = this.state.locations;
+        const chosenLocations = locations.filter(
+            (location) => location.player === this.state.currentPlayer
+        );
+        return chosenLocations.length === 8;
     };
 
     render() {
@@ -21,8 +62,17 @@ class App extends React.Component<{}, State> {
         let block;
 
         if (stage === "arrangement") {
-            block = <Arrangement />;
+            block = (
+                <Arrangement
+                    placeShip={this.placeShip}
+                    player={this.state.currentPlayer}
+                    locations={this.state.locations}
+                    confirm={this.confirm}
+                    hasEightShip={this.checkEightShip}
+                />
+            );
         } else if (stage === "game") {
+            console.log(this.state);
             block = <Game />;
         } else if (stage === "winner") {
             block = <Winner />;
@@ -35,11 +85,14 @@ class App extends React.Component<{}, State> {
                 </header>
                 <button
                     name="button"
-                    onClick={this.startGame}
-                    className="btn btn-start"
-                    hidden={stage !== "start"}
+                    onClick={
+                        stage === "start" ? this.startGame : this.restartGame
+                    }
+                    className={
+                        stage === "start" ? "btn btn-start" : "btn btn-restart"
+                    }
                 >
-                    Start game
+                    {stage === "start" ? "Start Game" : "Restart"}
                 </button>
                 {block}
             </>
