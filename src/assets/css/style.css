@@ -1,0 +1,109 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Black.woff2") format("woff2"),
+        url("../fonts/Roboto-Black.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Medium.woff2") format("woff2"),
+        url("../fonts/Roboto-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Thin.woff2") format("woff2"),
+        url("../fonts/Roboto-Thin.woff") format("woff");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.woff2") format("woff2"),
+        url("../fonts/Roboto-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Light.woff2") format("woff2"),
+        url("../fonts/Roboto-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Bold.woff2") format("woff2"),
+        url("../fonts/Roboto-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    background: rgb(245, 245, 245);
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+#game {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-header {
+    border-bottom: 2px solid rgb(205, 205, 205);
+}
+
+.game-title {
+    font-size: 40px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.btn {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #f26b6f;
+    font-weight: 500;
+    border: none;
+}
+
+.btn-start {
+    align-self: center;
+    font-style: 26px;
+    text-transform: uppercase;
+    margin: 20px auto;
+    padding: 15px 30px;
+}
+
+.btn-start:hover {
+    background-color: #da6064;
+}
