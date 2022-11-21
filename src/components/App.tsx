@@ -1,19 +1,33 @@
 import React from "react";
 import State from "../types";
+import Arrangement from "./Arrangement";
+import Game from "./Game";
+import Winner from "./Winner";
 
 class App extends React.Component<{}, State> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            start: false,
+            stage: "start",
         };
     }
 
     startGame = () => {
-        this.setState({ start: true });
+        this.setState({ stage: "arrangement" });
     };
 
     render() {
+        const stage = this.state.stage;
+        let block;
+
+        if (stage === "arrangement") {
+            block = <Arrangement />;
+        } else if (stage === "game") {
+            block = <Game />;
+        } else if (stage === "winner") {
+            block = <Winner />;
+        }
+
         return (
             <>
                 <header className="game-header">
@@ -23,10 +37,11 @@ class App extends React.Component<{}, State> {
                     name="button"
                     onClick={this.startGame}
                     className="btn btn-start"
-                    hidden={this.state.start}
+                    hidden={stage !== "start"}
                 >
                     Start game
                 </button>
+                {block}
             </>
         );
     }
