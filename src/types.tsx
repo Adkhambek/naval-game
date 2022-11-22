@@ -52,6 +52,7 @@ export interface GameSquareGridInterface {
     isSelected?: boolean;
     attack?: attack;
     result?: result;
+    myField?: attack;
 }
 
 export interface GameGridInterface {

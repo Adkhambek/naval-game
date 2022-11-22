@@ -7,7 +7,7 @@ class App extends React.Component<{}, State> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            stage: "winner",
+            stage: "start",
             currentPlayer: 1,
             locations: [],
             startMove: false,

@@ -56,6 +56,7 @@ class Game extends React.Component<GameInterface> {
                                 <Grid
                                     field={"my"}
                                     locations={this.props.locations}
+                                    attacks={this.props.attacks}
                                     player={this.props.player}
                                 />
                             </div>
@@ -90,6 +91,9 @@ class Grid extends React.Component<GameGridInterface> {
         );
         return index !== -1;
     }
+    changePlayer(player: number) {
+        return player === 1 ? 2 : 1;
+    }
     render() {
         const squares = [];
         for (let i = 1; i <= 25; i++) {
@@ -108,6 +112,12 @@ class Grid extends React.Component<GameGridInterface> {
                             attack.cell === i &&
                             attack.player === this.props.player
                     )}
+                    myField={this.props.attacks?.find(
+                        (attack) =>
+                            attack.cell === i &&
+                            attack.player ===
+                                this.changePlayer(this.props.player)
+                    )}
                 />
             );
         }
@@ -124,6 +134,10 @@ class Square extends React.Component<GameSquareGridInterface> {
     render() {
         let square;
         if (this.props.field === "my") {
+            let classNames = "grid-square";
+            if (this.props.myField)
+                classNames += " " + this.props.myField.result;
+
             const locations = this.props.locations;
             const index = locations.findIndex(
                 (location) =>
@@ -131,7 +145,7 @@ class Square extends React.Component<GameSquareGridInterface> {
                     location.player === this.props.player
             );
             square = (
-                <div className="grid-square" aria-label="grid square">
+                <div className={classNames} aria-label="grid square">
                     {index !== -1 && <FontAwesomeIcon icon={faAnchor} />}
                 </div>
             );
