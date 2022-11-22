@@ -18,6 +18,7 @@ export default interface State {
     isSelected: boolean;
     result: result;
     attacks: attack[];
+    winner: 0 | 1 | 2;
 }
 
 export interface ArrangementInterface {
@@ -74,4 +75,8 @@ export interface GameInterface {
     attack: () => void;
     result: result;
     endTurn: () => void;
+}
+
+export interface WinnerInterface {
+    winner: 0 | 1 | 2;
 }

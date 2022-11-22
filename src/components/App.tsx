@@ -2,19 +2,19 @@ import React from "react";
 import State from "../types";
 import Arrangement from "./Arrangement";
 import Game from "./Game";
-import Winner from "./Winner";
 
 class App extends React.Component<{}, State> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            stage: "game",
+            stage: "winner",
             currentPlayer: 1,
             locations: [],
             startMove: false,
             isSelected: false,
             result: null,
             attacks: [],
+            winner: 0,
         };
     }
 
@@ -122,6 +122,7 @@ class App extends React.Component<{}, State> {
                 attack.result === null &&
                 attack.player === this.state.currentPlayer
         );
+
         let player = this.state.currentPlayer === 1 ? 2 : 1;
         const ship = locations.find(
             (location) =>
@@ -138,6 +139,26 @@ class App extends React.Component<{}, State> {
         }
 
         this.setState({ attacks, isSelected: false, result });
+
+        const player1 = attacks.filter(
+            (attack) => attack.player === 1 && attack.result === "killed"
+        );
+
+        const player2 = attacks.filter(
+            (attack) => attack.player === 2 && attack.result === "killed"
+        );
+
+        if (player1.length === 8) {
+            this.setState({
+                stage: "winner",
+                winner: 1,
+            });
+        } else if (player2.length === 8) {
+            this.setState({
+                stage: "winner",
+                winner: 2,
+            });
+        }
     };
 
     endTurn = () => {
@@ -156,6 +177,7 @@ class App extends React.Component<{}, State> {
 
     render() {
         const stage = this.state.stage;
+        const winner = this.state.winner === 1 ? "1st" : "2nd";
         let block;
 
         if (stage === "arrangement") {
@@ -183,8 +205,6 @@ class App extends React.Component<{}, State> {
                     endTurn={this.endTurn}
                 />
             );
-        } else if (stage === "winner") {
-            block = <Winner />;
         }
 
         return (
@@ -192,6 +212,9 @@ class App extends React.Component<{}, State> {
                 <header className="game-header">
                     <h1 className="game-title">Naval Game</h1>
                 </header>
+                {stage === "winner" && (
+                    <h2 className="winner-title">🎉 {winner} player won!</h2>
+                )}
                 <button
                     name="button"
                     onClick={
@@ -200,10 +223,16 @@ class App extends React.Component<{}, State> {
                     className={
                         stage === "start"
                             ? "btn btn-start btn-green"
+                            : stage === "winner"
+                            ? "btn btn-start btn-green"
                             : "btn btn-restart btn-red"
                     }
                 >
-                    {stage === "start" ? "Start Game" : "Restart"}
+                    {stage === "start"
+                        ? "Start Game"
+                        : stage === "winner"
+                        ? "Start again"
+                        : "Restart"}
                 </button>
                 {block}
             </>

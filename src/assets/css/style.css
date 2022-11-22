@@ -196,3 +196,8 @@ body {
 .attack-result button {
     margin-top: 20px;
 }
+
+.winner-title {
+    text-align: center;
+    margin: 30px 0;
+}
