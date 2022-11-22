@@ -100,24 +100,39 @@ body {
 }
 
 .btn-start {
-    background-color: #4b9200;
     align-self: center;
     margin: 20px auto;
 }
 
-.btn-start:hover,
-.btn-confirm:hover {
-    background-color: #3f7900;
-}
-
 .btn-restart {
-    background-color: #f26b6f;
     position: absolute;
     top: 25px;
 }
 
-.btn-restart:hover {
+.btn-green {
+    background-color: #4b9200 !important;
+    color: #ffffff !important;
+}
+
+.btn-green:hover {
+    background-color: #3f7900;
+}
+
+.btn-red {
+    background-color: #f26b6f !important;
+}
+
+.btn-red:hover {
     background-color: #e47209;
+}
+
+.killed {
+    background-color: #4b9200 !important;
+    color: #ffffff !important;
+}
+
+.missed {
+    background-color: #f26b6f !important;
 }
 
 .arrangement {
@@ -149,6 +164,10 @@ body {
     border: 2px solid #767474;
 }
 
+.grid .selected {
+    background-color: #ffee2e !important;
+}
+
 .btn-confirm {
     background-color: #488c00;
 }
@@ -156,4 +175,24 @@ body {
 .arrangement .disabled {
     cursor: default;
     background-color: #bdbdbd;
+}
+
+.game {
+    text-align: center;
+}
+
+.game h2 {
+    margin-top: 20px;
+}
+
+.fields {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+.attack-result button {
+    margin-top: 20px;
 }
